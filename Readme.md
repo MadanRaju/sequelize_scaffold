@@ -47,7 +47,7 @@ will run the pre-commit hooks which include running eslint and all the tests.
 
 ## Help
 
-For more information on all the things you can mail Abhishek Puri at Abhishek.Puri@Bain.com.
+For more information on all the things you can mail Madan Lokikere at madan.731993@gmail.com.
 
 ## Changelog
 
