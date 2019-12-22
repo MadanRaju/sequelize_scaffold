@@ -51,7 +51,7 @@
     "lodash": "^4.17.10",
     "nodemailer": "^4.6.7",
     "passport-jwt": "^4.0.0",
-    "sequelize": "^4.38.0",
+    "sequelize": "^5.21.3",
     "tedious": "^2.6.3",
     "uuid": "^3.3.2",
     "winston": "^3.0.0",
