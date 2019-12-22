@@ -1,0 +1,24 @@
+//development overrides go here
+
+module.exports = {
+  logging: { level: 'debug' },
+  database: {
+    database: , //database name
+    username: , //database username
+    password: , //database password
+    dialectOptions: {
+      encrypt: false,
+    },
+  },
+  sysadminPassword: , //set sysAdmin password
+  authentication: {
+    secret: , //generate and paste new secret using `yarn g secret`
+  },
+  mailing: {
+    transport: 'smtp://localhost:25', //change for a different host or add in following format smtp[s]://<username>:<password>@<smtpHost>:<port>?[secure=true]|[tls=true]
+    recepientOverrideEmailId: ,//add your email id
+  },
+  resetPassword: {
+    secret: ,//generate and paste new secret using `yarn g secret`
+  },
+};

@@ -1,0 +1,14 @@
+const path = require('path');
+const fs = require('fs');
+const AppConfigs = require('./src/configuration')();
+//delete AppConfigs.database.logging
+const CONFIGS = {[AppConfigs.getEnvironment()]: AppConfigs.database};
+
+fs.writeFileSync('.databaseConfig.json', JSON.stringify(CONFIGS), {flag: 'w'});
+
+module.exports = {
+  'config': '.databaseConfig.json',
+  'migrations-path': path.resolve('database/migrations'),
+  'seeders-path': path.resolve('database/seeders'),
+  'models-path': path.resolve('src/models')
+};

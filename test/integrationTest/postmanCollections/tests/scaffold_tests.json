@@ -1,0 +1,1241 @@
+{
+	"info": {
+		"_postman_id": "32f18f5d-a0d4-4763-b03e-8c2443c222dc",
+		"name": "Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Get Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b0c521b1-91ae-4089-83e4-85ae90c16ec4",
+								"type": "text/javascript",
+								"exec": [
+									"var parsedResponse = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"API returns Token\", () => {",
+									"    let jsonData = pm.response.json();",
+									"    pm.expect(jsonData.accessToken).to.not.be.empty;",
+									"    pm.environment.set(\"auth_token\", jsonData.accessToken);",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"{{username}}\",\n\t\"password\": \"{{password}}\"\n}"
+						},
+						"url": {
+							"raw": "{{apiServer}}{{loginAPI}}",
+							"host": [
+								"{{apiServer}}{{loginAPI}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b641437b-1ed1-4dec-8994-f020fdbbcfb8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "12d8ae48-edfe-4744-8a73-95ee8a1f0bbb",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "UML",
+			"item": [
+				{
+					"name": "2. GetAllUsers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4658abd5-5a95-4f60-b3c5-6f33edcafce8",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"let responseData = pm.response.json();",
+									"",
+									"pm.test('Response schema is valid', () => {",
+									"    let responseSchema = {",
+									"  \"definitions\": {}, ",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\", ",
+									"  \"$id\": \"http://example.com/root.json\", ",
+									"  \"type\": \"array\", ",
+									"  \"title\": \"The Root Schema\", ",
+									"  \"items\": {",
+									"    \"$id\": \"#/items\", ",
+									"    \"type\": \"object\", ",
+									"    \"title\": \"The Items Schema\", ",
+									"    \"required\": [",
+									"      \"id\", ",
+									"      \"name\", ",
+									"      \"emailId\", ",
+									"      \"mobileNumber\", ",
+									"      \"username\", ",
+									"      \"roleId\", ",
+									"      \"createdAt\", ",
+									"      \"updatedAt\", ",
+									"      \"deletedAt\", ",
+									"      \"role\"",
+									"    ], ",
+									"    \"properties\": {",
+									"      \"id\": {",
+									"        \"$id\": \"#/items/properties/id\", ",
+									"        \"type\": \"string\", ",
+									"        \"title\": \"The Id Schema\", ",
+									"        \"default\": \"\", ",
+									"        \"examples\": [",
+									"          \"B73197AB-35AF-4DD5-9330-79FD05FA34D1\"",
+									"        ], ",
+									"        \"pattern\": \"^(.*)$\"",
+									"      }, ",
+									"      \"name\": {",
+									"        \"$id\": \"#/items/properties/name\", ",
+									"        \"type\": \"string\", ",
+									"        \"title\": \"The Name Schema\", ",
+									"        \"default\": \"\", ",
+									"        \"examples\": [",
+									"          \"System Admin\"",
+									"        ], ",
+									"        \"pattern\": \"^(.*)$\"",
+									"      }, ",
+									"      \"emailId\": {",
+									"        \"$id\": \"#/items/properties/emailId\", ",
+									"        \"type\": \"string\", ",
+									"        \"title\": \"The Emailid Schema\", ",
+									"        \"default\": \"\", ",
+									"        \"examples\": [",
+									"          \"Abhishek.Puri@Bain.com\"",
+									"        ], ",
+									"        \"pattern\": \"^(.*)$\"",
+									"      }, ",
+									"      \"mobileNumber\": {",
+									"        \"$id\": \"#/items/properties/mobileNumber\", ",
+									"        \"type\": \"null\", ",
+									"        \"title\": \"The Mobilenumber Schema\", ",
+									"        \"default\": null, ",
+									"        \"examples\": [",
+									"          null",
+									"        ]",
+									"      }, ",
+									"      \"username\": {",
+									"        \"$id\": \"#/items/properties/username\", ",
+									"        \"type\": \"string\", ",
+									"        \"title\": \"The Username Schema\", ",
+									"        \"default\": \"\", ",
+									"        \"examples\": [",
+									"          \"sysadmin\"",
+									"        ], ",
+									"        \"pattern\": \"^(.*)$\"",
+									"      }, ",
+									"      \"roleId\": {",
+									"        \"$id\": \"#/items/properties/roleId\", ",
+									"        \"type\": \"integer\", ",
+									"        \"title\": \"The Roleid Schema\", ",
+									"        \"default\": 0, ",
+									"        \"examples\": [",
+									"          0",
+									"        ]",
+									"      }, ",
+									"      \"createdAt\": {",
+									"        \"$id\": \"#/items/properties/createdAt\", ",
+									"        \"type\": \"string\", ",
+									"        \"title\": \"The Createdat Schema\", ",
+									"        \"default\": \"\", ",
+									"        \"examples\": [",
+									"          \"2018-08-20T16:12:12.401Z\"",
+									"        ], ",
+									"        \"pattern\": \"^(.*)$\"",
+									"      }, ",
+									"      \"updatedAt\": {",
+									"        \"$id\": \"#/items/properties/updatedAt\", ",
+									"        \"type\": \"string\", ",
+									"        \"title\": \"The Updatedat Schema\", ",
+									"        \"default\": \"\", ",
+									"        \"examples\": [",
+									"          \"2018-08-20T16:12:12.401Z\"",
+									"        ], ",
+									"        \"pattern\": \"^(.*)$\"",
+									"      }, ",
+									"      \"deletedAt\": {",
+									"        \"$id\": \"#/items/properties/deletedAt\", ",
+									"        \"type\": \"null\", ",
+									"        \"title\": \"The Deletedat Schema\", ",
+									"        \"default\": null, ",
+									"        \"examples\": [",
+									"          null",
+									"        ]",
+									"      }, ",
+									"      \"role\": {",
+									"        \"$id\": \"#/items/properties/role\", ",
+									"        \"type\": \"string\", ",
+									"        \"title\": \"The Role Schema\", ",
+									"        \"default\": \"\", ",
+									"        \"examples\": [",
+									"          \"System Admin\"",
+									"        ], ",
+									"        \"pattern\": \"^(.*)$\"",
+									"      }",
+									"    }",
+									"  }",
+									"};",
+									"",
+									"    pm.expect(tv4.validate(responseData, responseSchema)).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Response includes element\", () => {",
+									"    ",
+									"    let expectedElement = ",
+									"    {",
+									"        \"id\": \"B73197AB-35AF-4DD5-9330-79FD05FA34D1\",",
+									"        \"name\": \"System Admin\",",
+									"        \"emailId\": \"Abhishek.Puri@Bain.com\",",
+									"        \"mobileNumber\": null,",
+									"        \"username\": \"sysadmin\",",
+									"        \"roleId\": 0,",
+									"        \"createdAt\": \"2018-08-20T16:12:12.401Z\",",
+									"        \"updatedAt\": \"2018-08-20T16:12:12.401Z\",",
+									"        \"deletedAt\": null,",
+									"        \"role\": \"System Admin\"",
+									"    };",
+									"    ",
+									"    pm.expect(_.any(responseData, _.matches(expectedElement))).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Response includes Array\", () => {",
+									"    ",
+									"    let expectedElements = [{",
+									"        \"id\": \"B73197AB-35AF-4DD5-9330-79FD05FA34D1\",",
+									"        \"name\": \"System Admin\",",
+									"        \"emailId\": \"Abhishek.Puri@Bain.com\",",
+									"        \"mobileNumber\": null,",
+									"        \"username\": \"sysadmin\",",
+									"        \"roleId\": 0,",
+									"        \"createdAt\": \"2018-08-20T16:12:12.401Z\",",
+									"        \"updatedAt\": \"2018-08-20T16:12:12.401Z\",",
+									"        \"deletedAt\": null,",
+									"        \"role\": \"System Admin\"",
+									"    }];",
+									"    ",
+									"    pm.expect(_.chain(expectedElements).map((x) => _.any(responseData, _.matches(x))).every().value()).to.be.true;",
+									"});",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json;"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{apiServer}}{{manageUserAPI}}",
+							"host": [
+								"{{apiServer}}{{manageUserAPI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Add a User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5cc31bb-b712-4444-b50c-b5f6303303f0",
+								"type": "text/javascript",
+								"exec": [
+									"let responseData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Id in response is not empty\", () => {",
+									"    pm.expect(responseData.id).not.to.be.empty;",
+									"    pm.environment.set(\"idOfAddedUser\", responseData.id);",
+									"});",
+									"",
+									"pm.test('Response schema is valid', () => {",
+									"    let responseSchema = {",
+									"  \"definitions\": {}, ",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\", ",
+									"  \"$id\": \"http://example.com/root.json\", ",
+									"  \"type\": \"object\", ",
+									"  \"title\": \"The Root Schema\", ",
+									"  \"required\": [",
+									"    \"id\", ",
+									"    \"name\", ",
+									"    \"username\", ",
+									"    \"roleId\", ",
+									"    \"role\", ",
+									"    \"emailId\", ",
+									"    \"createdBy\", ",
+									"    \"updatedAt\", ",
+									"    \"createdAt\"",
+									"  ], ",
+									"  \"properties\": {",
+									"    \"id\": {",
+									"      \"$id\": \"#/properties/id\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Id Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"880A7C53-20A6-48AC-B1E0-21B6B27F75A2\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"name\": {",
+									"      \"$id\": \"#/properties/name\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Name Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"Prashant\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"username\": {",
+									"      \"$id\": \"#/properties/username\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Username Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"prashants\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"roleId\": {",
+									"      \"$id\": \"#/properties/roleId\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Roleid Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"Member\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"role\": {",
+									"      \"$id\": \"#/properties/role\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Role Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"Member\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"emailId\": {",
+									"      \"$id\": \"#/properties/emailId\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Emailid Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"prashant.sinha@bain.com\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"createdBy\": {",
+									"      \"$id\": \"#/properties/createdBy\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Createdby Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"B73197AB-35AF-4DD5-9330-79FD05FA34D1\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"updatedAt\": {",
+									"      \"$id\": \"#/properties/updatedAt\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Updatedat Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"2018-08-23T11:32:36.612Z\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"createdAt\": {",
+									"      \"$id\": \"#/properties/createdAt\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Createdat Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"2018-08-23T11:32:36.612Z\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }",
+									"  }",
+									"};",
+									"    pm.expect(tv4.validate(responseData, responseSchema)).to.be.true;",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Response properties should match\", () => {",
+									"    let payloadData = JSON.parse(pm.environment.get(\"userDataForAdd\"));",
+									"    pm.expect(responseData.name).to.equal(payloadData.name);",
+									"    pm.expect(responseData.username).to.equal(payloadData.username);",
+									"    pm.expect(responseData.role).to.equal(payloadData.role);",
+									"    pm.expect(responseData.roleId).to.equal(payloadData.role);",
+									"    pm.expect(responseData.emailId).to.equal(payloadData.emailId);",
+									"    pm.expect(responseData.createdBy).not.to.be.empty;",
+									"    pm.expect(responseData.updatedAt).not.to.be.empty;",
+									"    pm.expect(responseData.updatedAt).not.to.be.empty;",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cef2da39-4c6e-4844-a300-8e7bd81fc48f",
+								"type": "text/javascript",
+								"exec": [
+									"const stringGenerator = eval(pm.globals.get(\"randomGenerator\"));",
+									"    ",
+									"",
+									"",
+									"pm.environment.set(\"userDataForAdd\", JSON.stringify({",
+									"  \"name\": \"Prashant\",",
+									"  \"username\": stringGenerator(6),",
+									"  \"role\": \"Member\",",
+									"  \"emailId\": stringGenerator(6)+\"@test123.com\",",
+									"  \"password\": \"P@ssw0rd123\"",
+									"}));",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{userDataForAdd}}"
+						},
+						"url": {
+							"raw": "{{apiServer}}{{manageUserAPI}}",
+							"host": [
+								"{{apiServer}}{{manageUserAPI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Get addedUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "579e4c1f-3707-4eb9-926e-625ff126e43c",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"let responseData = pm.response.json();",
+									"",
+									"",
+									"pm.test('Response schema is valid', () => {",
+									"    let responseSchema = {",
+									"  \"definitions\": {}, ",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\", ",
+									"  \"$id\": \"http://example.com/root.json\", ",
+									"  \"type\": \"object\", ",
+									"  \"title\": \"The Root Schema\", ",
+									"  \"required\": [",
+									"    \"id\", ",
+									"    \"name\", ",
+									"    \"emailId\", ",
+									"    \"mobileNumber\", ",
+									"    \"username\", ",
+									"    \"roleId\", ",
+									"    \"createdAt\", ",
+									"    \"updatedAt\", ",
+									"    \"deletedAt\", ",
+									"    \"role\"",
+									"  ], ",
+									"  \"properties\": {",
+									"    \"id\": {",
+									"      \"$id\": \"#/properties/id\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Id Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"8FCEBADB-8AF5-4534-9642-C5C9107C8821\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"name\": {",
+									"      \"$id\": \"#/properties/name\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Name Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"Prashant\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"emailId\": {",
+									"      \"$id\": \"#/properties/emailId\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Emailid Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"prashant.sinha123@bain.com\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"mobileNumber\": {",
+									"      \"$id\": \"#/properties/mobileNumber\", ",
+									"      \"type\": \"null\", ",
+									"      \"title\": \"The Mobilenumber Schema\", ",
+									"      \"default\": null, ",
+									"      \"examples\": [",
+									"        null",
+									"      ]",
+									"    }, ",
+									"    \"username\": {",
+									"      \"$id\": \"#/properties/username\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Username Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"prashants123\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"roleId\": {",
+									"      \"$id\": \"#/properties/roleId\", ",
+									"      \"type\": \"integer\", ",
+									"      \"title\": \"The Roleid Schema\", ",
+									"      \"default\": 0, ",
+									"      \"examples\": [",
+									"        2",
+									"      ]",
+									"    }, ",
+									"    \"createdAt\": {",
+									"      \"$id\": \"#/properties/createdAt\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Createdat Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"2018-08-23T11:38:41.699Z\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"updatedAt\": {",
+									"      \"$id\": \"#/properties/updatedAt\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Updatedat Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"2018-08-23T11:38:41.699Z\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"deletedAt\": {",
+									"      \"$id\": \"#/properties/deletedAt\", ",
+									"      \"type\": \"null\", ",
+									"      \"title\": \"The Deletedat Schema\", ",
+									"      \"default\": null, ",
+									"      \"examples\": [",
+									"        null",
+									"      ]",
+									"    }, ",
+									"    \"role\": {",
+									"      \"$id\": \"#/properties/role\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Role Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"Member\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }",
+									"  }",
+									"};",
+									"",
+									"    pm.expect(tv4.validate(responseData, responseSchema)).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Response equals element\", () => {",
+									"    let expectedElement = _.omit(JSON.parse(pm.environment.get(\"userDataForAdd\")), ['password']);",
+									"    pm.expect(responseData.deletedAt).to.eql(null);",
+									"    responseElement = _.omit(responseData, ['id','roleId','createdAt','updatedAt','deletedAt','mobileNumber']);",
+									"    pm.expect(responseElement).to.eql(expectedElement);",
+									"});",
+									"",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "726f7442-c5a9-44db-8fc9-cd3cf2c85391",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{apiServer}}{{manageUserAPI}}{{idOfAddedUser}}",
+							"host": [
+								"{{apiServer}}{{manageUserAPI}}{{idOfAddedUser}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4.1. Get User with non existent id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "633a97ff-9256-4960-a19a-0786951e2bf6",
+								"type": "text/javascript",
+								"exec": [
+									"let responseData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 404\", function() {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has message\", () => {",
+									"    pm.expect(responseData.name).to.eql(\"NotFound\");",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "726f7442-c5a9-44db-8fc9-cd3cf2c85391",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json; charset=utf-8"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{apiServer}}{{manageUserAPI}}{{$guid}}",
+							"host": [
+								"{{apiServer}}{{manageUserAPI}}{{$guid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Update added user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "10271585-a836-40aa-98dc-182a78d1587c",
+								"type": "text/javascript",
+								"exec": [
+									"let responseData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Id in response is not empty\", () => {",
+									"    pm.expect(responseData.id).not.to.be.empty;",
+									"    pm.environment.set(\"idOfAddedUser\", responseData.id);",
+									"});",
+									"",
+									"pm.test('Response schema is valid', () => {",
+									"    let responseSchema = {",
+									"  \"definitions\": {}, ",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\", ",
+									"  \"$id\": \"http://example.com/root.json\", ",
+									"  \"type\": \"object\", ",
+									"  \"title\": \"The Root Schema\", ",
+									"  \"required\": [",
+									"    \"id\", ",
+									"    \"name\", ",
+									"    \"emailId\", ",
+									"    \"mobileNumber\", ",
+									"    \"username\", ",
+									"    \"roleId\", ",
+									"    \"createdAt\", ",
+									"    \"updatedAt\", ",
+									"    \"deletedAt\", ",
+									"    \"role\"",
+									"  ], ",
+									"  \"properties\": {",
+									"    \"id\": {",
+									"      \"$id\": \"#/properties/id\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Id Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"8FCEBADB-8AF5-4534-9642-C5C9107C8821\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"name\": {",
+									"      \"$id\": \"#/properties/name\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Name Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"User 4\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"emailId\": {",
+									"      \"$id\": \"#/properties/emailId\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Emailid Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"prashant.sinha123@bain.com\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"mobileNumber\": {",
+									"      \"$id\": \"#/properties/mobileNumber\", ",
+									"      \"type\": \"null\", ",
+									"      \"title\": \"The Mobilenumber Schema\", ",
+									"      \"default\": null, ",
+									"      \"examples\": [",
+									"        null",
+									"      ]",
+									"    }, ",
+									"    \"username\": {",
+									"      \"$id\": \"#/properties/username\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Username Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"prashants123\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"roleId\": {",
+									"      \"$id\": \"#/properties/roleId\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Roleid Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"Member\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"createdAt\": {",
+									"      \"$id\": \"#/properties/createdAt\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Createdat Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"2018-08-23T11:38:41.699Z\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"updatedAt\": {",
+									"      \"$id\": \"#/properties/updatedAt\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Updatedat Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"2018-08-23T11:58:34.301Z\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }, ",
+									"    \"deletedAt\": {",
+									"      \"$id\": \"#/properties/deletedAt\", ",
+									"      \"type\": \"null\", ",
+									"      \"title\": \"The Deletedat Schema\", ",
+									"      \"default\": null, ",
+									"      \"examples\": [",
+									"        null",
+									"      ]",
+									"    }, ",
+									"    \"role\": {",
+									"      \"$id\": \"#/properties/role\", ",
+									"      \"type\": \"string\", ",
+									"      \"title\": \"The Role Schema\", ",
+									"      \"default\": \"\", ",
+									"      \"examples\": [",
+									"        \"Member\"",
+									"      ], ",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }",
+									"  }",
+									"};",
+									"    pm.expect(tv4.validate(responseData, responseSchema)).to.be.true;",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Response properties should match\", () => {",
+									"    let payloadData = JSON.parse(pm.environment.get(\"userDataForUpdate\"));",
+									"    pm.expect(responseData.name).to.equal(payloadData.name);",
+									"    pm.expect(responseData.roleId).to.equal(payloadData.role);",
+									"    pm.expect(responseData.role).to.equal(payloadData.role);",
+									"    pm.expect(responseData.deletedAt).to.eql(null);",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3536fb2c-13d6-445e-8366-8654b80181fa",
+								"type": "text/javascript",
+								"exec": [
+									"const stringGenerator = eval(pm.globals.get(\"randomGenerator\"));",
+									"",
+									"pm.environment.set(\"userDataForUpdate\", JSON.stringify({",
+									"\t\"name\": stringGenerator(6),",
+									"\t\"username\": \"user4\",",
+									"\t\"password\": \"P@ssw0rd123\",",
+									"\t\"role\": \"member\",",
+									"\t\"mobileNumber\": \"+919999999999\",",
+									"\t\"emailId\": stringGenerator(6)+\"@test123.com\",",
+									"\t\"createdBy\": \"B59EE5BA-E5FF-49D6-8696-20F0E21DA451\"",
+									"}));",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{userDataForUpdate}}"
+						},
+						"url": {
+							"raw": "{{apiServer}}{{manageUserAPI}}{{idOfAddedUser}}",
+							"host": [
+								"{{apiServer}}{{manageUserAPI}}{{idOfAddedUser}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Delete added user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1cb997af-f846-4fc8-a435-bc22444077b8",
+								"type": "text/javascript",
+								"exec": [
+									"let responseData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b30218b2-b4c3-45c5-8f28-808bced4f288",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"userDataForUpdate\", JSON.stringify({",
+									"  \"firstName\": \"Jude\",",
+									"  \"lastName\": \"Williams\",",
+									"  \"email\": \"testemail@test123.com\",",
+									"  \"picture\": \"string123\"",
+									"}));",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{userDataForUpdate}}"
+						},
+						"url": {
+							"raw": "{{apiServer}}{{manageUserAPI}}{{idOfAddedUser}}",
+							"host": [
+								"{{apiServer}}{{manageUserAPI}}{{idOfAddedUser}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6.1 Delete user with non existent id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a43148c2-6165-4d24-996e-64f6a67f8b76",
+								"type": "text/javascript",
+								"exec": [
+									"let responseData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 404\", () => {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Error Message includes\", function () {",
+									"    ",
+									"    pm.expect(responseData.name).to.eql(\"NotFound\");",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b30218b2-b4c3-45c5-8f28-808bced4f288",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"userDataForUpdate\", JSON.stringify({",
+									"  \"firstName\": \"Jude\",",
+									"  \"lastName\": \"Williams\",",
+									"  \"email\": \"testemail@test123.com\",",
+									"  \"picture\": \"string123\"",
+									"}));",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{userDataForUpdate}}"
+						},
+						"url": {
+							"raw": "{{apiServer}}{{manageUserAPI}}{{$guid}}",
+							"host": [
+								"{{apiServer}}{{manageUserAPI}}{{$guid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enums - Set,Get",
+			"item": [
+				{
+					"name": "Get all Enums",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{apiServer}}{{manageEnumsAPI}}",
+							"host": [
+								"{{apiServer}}{{manageEnumsAPI}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Enumeration",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "682943a2-14ba-4c44-8e3d-dc65e7054929",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"enumForAddition\", \"/testEnum/\");",
+									"",
+									"pm.environment.set(\"testData\",JSON.stringify({",
+									"\t\"name\": \"foo\"",
+									"}));"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5a0b77d9-40cd-4300-9311-3a775dd38b77",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response properties should match\", () => {",
+									"    let responseData = pm.response.json();",
+									"    pm.expect(responseData.id).not.to.be.empty;",
+									"    pm.expect(responseData.type).to.equal(\"TestEnum\");",
+									"    pm.expect(responseData.deletedAt).to.equal(null);",
+									"    ",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{testData}}"
+						},
+						"url": {
+							"raw": "{{apiServer}}{{manageEnumsAPI}}{{enumForAddition}}",
+							"host": [
+								"{{apiServer}}{{manageEnumsAPI}}{{enumForAddition}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete added Enum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d0791ae6-91ca-4d2f-9ed9-ac1a05b6673e",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response properties should match\", () => {",
+									"    let responseData = pm.response.json();",
+									"    pm.expect(responseData.id).not.to.be.empty;",
+									"    pm.expect(responseData.type).to.equal(\"TestEnum\");",
+									"    pm.expect(responseData.deletedAt).not.to.eql(null);",
+									"    ",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "54810ed8-df9d-407f-959e-0b479e63a6d0",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"testData\", \"0\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{userDataForUpdate}}"
+						},
+						"url": {
+							"raw": "{{apiServer}}{{manageEnumsAPI}}{{testData}}",
+							"host": [
+								"{{apiServer}}{{manageEnumsAPI}}{{testData}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "be87811d-301a-451b-b68d-c0759d175b47",
+				"type": "text/javascript",
+				"exec": [
+					"function stringGenerator(length) {",
+					"    const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';",
+					"    let result = '';",
+					"    for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];",
+					"    return result;",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e768ca06-e025-40ff-8dbf-09f79fd9e0c6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "scaffolding",
+  "version": "0.0.1",
+  "description": "Basic scaffold for a feathers REST API",
+  "main": "index.js",
+  "author": "Abhishek Puri <Abhishek.Puri@Bain.com>",
+  "license": "MIT",
+  "private": true,
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "engines": {
+    "node": "^10.0.0",
+    "yarn": ">= 0.18.0"
+  },
+  "scripts": {
+    "start": "sequelize db:migrate && node src/",
+    "test": "yarn run eslint && yarn run mocha",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "precommit": "eslint src/ test/ --config .eslintrc.json",
+    "mocha": "mocha test/ --recursive --exit",
+    "g": "feathers generate",
+    "migrate": "sequelize db:migrate",
+    "seed": "sequelize db:seed:all",
+    "rollback": "sequelize db:migrate:undo",
+    "createMigration": "sequelize migration:create --name",
+    "createModel": "sequelize model:create --name",
+    "test-local": "export NODE_ENV=Local && node test/integrationTest/index.js",
+    "test-qa": "export NODE_ENV=QA && node test/integrationTest/index.js",
+    "test-dev": "export NODE_ENV=Dev && node test/integrationTest/index.js",
+    "test-stg": "export NODE_ENV=stg && node test/integrationTest/index.js"
+  },
+  "dependencies": {
+    "@feathersjs/configuration": "^1.0.2",
+    "@feathersjs/errors": "^3.3.0",
+    "@feathersjs/express": "^1.2.3",
+    "@feathersjs/feathers": "^3.1.7",
+    "axios": "^0.18.0",
+    "bcrypt-nodejs": "^0.0.3",
+    "compression": "^1.7.3",
+    "cors": "^2.8.4",
+    "feathers-auth": "git+ssh://git@engr.tools.bain.com:7999/fms/feathers-auth.git#0.2.0",
+    "feathers-errors": "^2.9.2",
+    "feathers-hooks-common": "^4.15.0",
+    "feathers-sequelize": "^3.1.2",
+    "fs-extra": "^7.0.0",
+    "helmet": "^3.13.0",
+    "inflection": "^1.12.0",
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.10",
+    "nodemailer": "^4.6.7",
+    "passport-jwt": "^4.0.0",
+    "sequelize": "^4.38.0",
+    "tedious": "^2.6.3",
+    "uuid": "^3.3.2",
+    "winston": "^3.0.0",
+    "winston-daily-rotate-file": "^3.3.0"
+  },
+  "devDependencies": {
+    "@feathersjs/cli": "^3.7.6",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "husky": "^0.14.3",
+    "mocha": "^5.2.0",
+    "pm-api-test-runner": "git+ssh://git@engr.tools.bain.com:7999/fms/pm-api-test-runner.git",
+    "sequelize-cli": "^4.0.0"
+  }
+}
