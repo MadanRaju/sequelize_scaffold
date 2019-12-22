@@ -3,7 +3,7 @@ const { sysadminPassword } = require('../../src/configuration')();
 
 const sysadminUserDetails = {
   name: 'System Admin',
-  emailId: 'Abhishek.Puri@Bain.com',
+  emailId: 'madan.731993@gmail.com.com',
   roleId: 0,
   password: sysadminPassword,
 };

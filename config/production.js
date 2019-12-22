@@ -1,6 +1,6 @@
 module.exports = {
   port: 'PORT',
-  host: 'scaffolding.bain.com',
+  host: 'scaffolding.com',
   database: {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,

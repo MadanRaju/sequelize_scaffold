@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Basic scaffold for a feathers REST API",
   "main": "index.js",
-  "author": "Abhishek Puri <Abhishek.Puri@Bain.com>",
+  "author": "Madan Lokikere <madan.731993@gmail.com>",
   "license": "MIT",
   "private": true,
   "directories": {
@@ -40,7 +40,7 @@
     "bcrypt-nodejs": "^0.0.3",
     "compression": "^1.7.3",
     "cors": "^2.8.4",
-    "feathers-auth": "git+ssh://git@engr.tools.bain.com:7999/fms/feathers-auth.git#0.2.0",
+    "feathers-auth": "git+ssh://github.com/MadanRaju/feathers_authentication.git#0.0.0",
     "feathers-errors": "^2.9.2",
     "feathers-hooks-common": "^4.15.0",
     "feathers-sequelize": "^3.1.2",
@@ -64,7 +64,6 @@
     "eslint-plugin-import": "^2.13.0",
     "husky": "^0.14.3",
     "mocha": "^5.2.0",
-    "pm-api-test-runner": "git+ssh://git@engr.tools.bain.com:7999/fms/pm-api-test-runner.git",
     "sequelize-cli": "^4.0.0"
   }
 }
